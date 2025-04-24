@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 폰 - 휴대폰 판매 서비스</title>
+    <link rel="stylesheet" href="/assets/css/indexStyles.css">
+    <link rel="stylesheet" href="/assets/css/commonStyles.css">
+</head>
+<body>
+<header>
+    <div class="container header-container">
+        <div class="logo">
+            <img src="images/logo.png" alt="오늘의 폰">
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#">전체보기</a></li>
+                <li><a href="#">이벤트</a></li>
+                <li><a href="#">장바구니</a></li>
+                <li><a href="#">구매내역</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="login-btn">LOGIN</button>
+            <button class="join-btn">JOIN</button>
+            <span class="user-name-wrapper"><span class="user-name"></span> 님 안녕하세요.</span>
+            <button class="logout-btn">LOGOUT</button>
+        </div>
+    </div>
+</header>
+
+<section class="hero" style="background-color: #3853E8;">
+    <div class="container hero-container">
+        <div class="hero-content">
+            <h1>쉽고 편한 휴대폰 구매</h1>
+            <h2>오늘의 홈</h2>
+            <div class="hashtag-container">
+                <span class="hashtag">#가장 최저가로 모십니다.</span>
+                <span class="hashtag">#품질보장! 가격보장!</span>
+            </div>
+
+            <div class="search-box">
+                <input type="text" placeholder="검색어를 입력해주세요.">
+                <button type="submit" class="search-btn">
+                    <img src="images/search-icon.png" alt="검색">
+                </button>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="images/phone-mockup.png" alt="모바일 앱 화면">
+        </div>
+    </div>
+</section>
+
+<!-- 휴대폰 리스트 섹션 -->
+<section class="phone-detail-listings">
+    <div class="container">
+        <h2>전체상품</h2>
+        <div class="phone-detail-grid">
+            <!-- 첫 번째 줄 휴대폰 -->
+            <div class="phone-detail-card">
+                <div class="phone-detail-image">
+                    <img src="images/phones/iphone15-pro.jpg" alt="iPhone 15 Pro">
+                </div>
+                <div class="phone-detail-info">
+                    <h3 class="phone-name">iPhone 15 Pro</h3>
+                    <div class="phone-specs">
+                        <span>Apple</span>
+                        <span>2023년 9월</span>
+                        <span>256GB</span>
+                    </div>
+                    <div class="phone-company">Apple Inc.</div>
+                    <div class="phone-price">1,550,000 <span>원</span></div>
+                </div>
+            </div>
+
+            <div class="phone-detail-card">
+                <div class="phone-detail-image">
+                    <img src="images/phones/galaxy-s23-ultra.jpg" alt="Galaxy S23 Ultra">
+                </div>
+                <div class="phone-detail-info">
+                    <h3 class="phone-name">Galaxy S23 Ultra</h3>
+                    <div class="phone-specs">
+                        <span>Samsung</span>
+                        <span>2023년 2월</span>
+                        <span>512GB</span>
+                    </div>
+                    <div class="phone-company">Samsung Electronics</div>
+                    <div class="phone-price">1,450,000 <span>원</span></div>
+                </div>
+            </div>
+
+            <div class="phone-detail-card">
+                <div class="phone-detail-image">
+                    <img src="images/phones/pixel-8-pro.jpg" alt="Google Pixel 8 Pro">
+                </div>
+                <div class="phone-detail-info">
+                    <h3 class="phone-name">Google Pixel 8 Pro</h3>
+                    <div class="phone-specs">
+                        <span>Google</span>
+                        <span>2023년 10월</span>
+                        <span>256GB</span>
+                    </div>
+                    <div class="phone-company">Google LLC</div>
+                    <div class="phone-price">1,349,000 <span>원</span></div>
+                </div>
+            </div>
+
+            <div class="phone-detail-card">
+                <div class="phone-detail-image">
+                    <img src="images/phones/xiaomi-13t-pro.jpg" alt="Xiaomi 13T Pro">
+                </div>
+                <div class="phone-detail-info">
+                    <h3 class="phone-name">Xiaomi 13T Pro</h3>
+                    <div class="phone-specs">
+                        <span>Xiaomi</span>
+                        <span>2023년 9월</span>
+                        <span>512GB</span>
+                    </div>
+                    <div class="phone-company">Xiaomi Corporation</div>
+                    <div class="phone-price">899,000 <span>원</span></div>
+                </div>
+            </div>
+
+            <div class="phone-detail-card">
+                <div class="phone-detail-image">
+                    <img src="images/phones/sony-xperia-1-v.jpg" alt="Sony Xperia 1 V">
+                </div>
+                <div class="phone-detail-info">
+                    <h3 class="phone-name">Sony Xperia 1 V</h3>
+                    <div class="phone-specs">
+                        <span>Sony</span>
+                        <span>2023년 5월</span>
+                        <span>256GB</span>
+                    </div>
+                    <div class="phone-company">Sony Corporation</div>
+                    <div class="phone-price">1,390,000 <span>원</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/footer-logo.png" alt="하나카즈 로고">
+            </div>
+            <div class="footer-links">
+                <!-- 푸터 링크들 -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/assets/js/indexJS.js"></script>
+<script>
+    window.onload = function () {
+        initUI();
+
+        document.querySelector(".login-btn").onclick = function() {
+            window.location.href = "/login.html";
+        };
+
+        document.querySelector(".logout-btn").onclick = logout;
+    }
+</script>
+</body>
+</html>

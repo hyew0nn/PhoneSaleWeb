@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 폰 - 휴대폰 판매 서비스</title>
+    <link rel="stylesheet" href="/assets/css/loginStyles.css">
+    <link rel="stylesheet" href="/assets/css/commonStyles.css">
+</head>
+<body>
+<header>
+    <div class="container header-container">
+        <div class="logo">
+            <img src="images/logo.png" alt="오늘의 폰">
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#">전체보기</a></li>
+                <li><a href="#">이벤트</a></li>
+                <li><a href="#">장바구니</a></li>
+                <li><a href="#">구매내역</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- 로그인 섹션 -->
+<section class="login-container">
+    <h1 class="login-heading">로그인</h1>
+
+    <div class="login-form">
+        <form>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="text" id="email" placeholder="아이디를 입력하세요" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" placeholder="비밀번호를 입력하세요" required>
+            </div>
+
+            <button type="button" class="submit-btn">로그인하기</button>
+
+            <div class="form-footer">
+                <p>계정이 없으신가요? <a href="#">회원가입</a></p>
+                <p><a href="#">아이디/비밀번호 찾기</a></p>
+            </div>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/footer-logo.png" alt="하나카즈 로고">
+            </div>
+            <div class="footer-links">
+                <!-- 푸터 링크들 -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    window.onload = function(){
+        document.querySelector(".submit-btn").onclick = login;
+    }
+
+    async function login(){
+        // parameter, value
+        let email = document.querySelector("#email").value;
+        let password = document.querySelector("#password").value;
+
+        console.log(email, password);
+
+        let jsonStr = JSON.stringify({ email, password });
+
+        // url
+        let url = "/users/login";
+
+        // post, parameter
+        let fetchOptions = {
+            method: "POST",
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: jsonStr
+        }
+
+        let response = await fetch(url, fetchOptions);
+        let data = await response.json()
+
+        console.log(data);
+
+        if(data.result == "success"){
+
+            // user 의 name, email 을 이후 사용하려 한다.
+            sessionStorage.setItem("name", data.userDto.name);
+            sessionStorage.setItem("email", data.userDto.email);
+
+            // index.html 이동
+            window.location.href="index.html";
+
+        }else{ // fail or notfound
+            alert("로그인 실패");
+        }
+    }
+</script>
+</body>
+</html>
