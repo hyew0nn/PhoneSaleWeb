@@ -1,8 +1,9 @@
 package com.mycom.myapp.auth.service;
 
-import com.mycom.myapp.user.dto.LoginRequestDto;
+import com.mycom.myapp.auth.dto.LoginRequestDto;
+import com.mycom.myapp.auth.dto.UserSessionDto;
 import com.mycom.myapp.user.dto.UserDto;
-import com.mycom.myapp.user.dto.LoginResponseDto;
+import com.mycom.myapp.auth.dto.LoginResponseDto;
 import com.mycom.myapp.user.entity.User;
 import com.mycom.myapp.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,15 +26,14 @@ public class LoginServiceImpl implements LoginService{
             User user = optionalUser.get();
 
             if(user.getPassword().equals(loginRequestDto.getPassword())){
-                UserDto userDto = UserDto.builder()
+                UserSessionDto userSessionDto = UserSessionDto.builder()
+                        .id(user.getId())
                         .email(user.getEmail())
                         .name(user.getName())
-                        .phone(user.getPhone())
-                        .address(user.getAddress())
                         .adminRole(user.getAdminRole())
                         .build();
 
-                authResponseDto.setUserDto(userDto);
+                authResponseDto.setUserSessionDto(userSessionDto);
                 authResponseDto.setResult("success");
             } else {
                 authResponseDto.setResult("fail");

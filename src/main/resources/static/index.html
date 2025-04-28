@@ -17,8 +17,8 @@
             <ul>
                 <li><a href="#">전체보기</a></li>
                 <li><a href="#">이벤트</a></li>
-                <li><a href="#">장바구니</a></li>
-                <li><a href="#">구매내역</a></li>
+                <li id="link-cart"><a href="#">장바구니</a></li>
+                <li id="link-buyList"><a href="#">구매내역</a></li>
             </ul>
         </nav>
         <div class="auth-buttons">
@@ -58,87 +58,8 @@
 <section class="phone-detail-listings">
     <div class="container">
         <h2>전체상품</h2>
-        <div class="phone-detail-grid">
-            <!-- 첫 번째 줄 휴대폰 -->
-            <div class="phone-detail-card">
-                <div class="phone-detail-image">
-                    <img src="images/phones/iphone15-pro.jpg" alt="iPhone 15 Pro">
-                </div>
-                <div class="phone-detail-info">
-                    <h3 class="phone-name">iPhone 15 Pro</h3>
-                    <div class="phone-specs">
-                        <span>Apple</span>
-                        <span>2023년 9월</span>
-                        <span>256GB</span>
-                    </div>
-                    <div class="phone-company">Apple Inc.</div>
-                    <div class="phone-price">1,550,000 <span>원</span></div>
-                </div>
-            </div>
+        <div class="phone-detail-grid" id="product-list">
 
-            <div class="phone-detail-card">
-                <div class="phone-detail-image">
-                    <img src="images/phones/galaxy-s23-ultra.jpg" alt="Galaxy S23 Ultra">
-                </div>
-                <div class="phone-detail-info">
-                    <h3 class="phone-name">Galaxy S23 Ultra</h3>
-                    <div class="phone-specs">
-                        <span>Samsung</span>
-                        <span>2023년 2월</span>
-                        <span>512GB</span>
-                    </div>
-                    <div class="phone-company">Samsung Electronics</div>
-                    <div class="phone-price">1,450,000 <span>원</span></div>
-                </div>
-            </div>
-
-            <div class="phone-detail-card">
-                <div class="phone-detail-image">
-                    <img src="images/phones/pixel-8-pro.jpg" alt="Google Pixel 8 Pro">
-                </div>
-                <div class="phone-detail-info">
-                    <h3 class="phone-name">Google Pixel 8 Pro</h3>
-                    <div class="phone-specs">
-                        <span>Google</span>
-                        <span>2023년 10월</span>
-                        <span>256GB</span>
-                    </div>
-                    <div class="phone-company">Google LLC</div>
-                    <div class="phone-price">1,349,000 <span>원</span></div>
-                </div>
-            </div>
-
-            <div class="phone-detail-card">
-                <div class="phone-detail-image">
-                    <img src="images/phones/xiaomi-13t-pro.jpg" alt="Xiaomi 13T Pro">
-                </div>
-                <div class="phone-detail-info">
-                    <h3 class="phone-name">Xiaomi 13T Pro</h3>
-                    <div class="phone-specs">
-                        <span>Xiaomi</span>
-                        <span>2023년 9월</span>
-                        <span>512GB</span>
-                    </div>
-                    <div class="phone-company">Xiaomi Corporation</div>
-                    <div class="phone-price">899,000 <span>원</span></div>
-                </div>
-            </div>
-
-            <div class="phone-detail-card">
-                <div class="phone-detail-image">
-                    <img src="images/phones/sony-xperia-1-v.jpg" alt="Sony Xperia 1 V">
-                </div>
-                <div class="phone-detail-info">
-                    <h3 class="phone-name">Sony Xperia 1 V</h3>
-                    <div class="phone-specs">
-                        <span>Sony</span>
-                        <span>2023년 5월</span>
-                        <span>256GB</span>
-                    </div>
-                    <div class="phone-company">Sony Corporation</div>
-                    <div class="phone-price">1,390,000 <span>원</span></div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
@@ -160,12 +81,79 @@
 <script>
     window.onload = function () {
         initUI();
+        fetchProducts();
 
         document.querySelector(".login-btn").onclick = function() {
             window.location.href = "/login.html";
         };
 
         document.querySelector(".logout-btn").onclick = logout;
+    }
+
+
+    // 제품 API에서 데이터 가져오기
+    async function fetchProducts() {
+        try {
+            const response = await fetch('api/products');
+            if (!response.ok) {
+                throw new Error('제품 데이터를 불러오는데 실패했습니다');
+            }
+            const data = await response.json(); // 전체 응답 객체
+
+            // products 배열 접근
+            if (data.message === "success" && Array.isArray(data.products)) {
+                renderProducts(data.products);
+            } else {
+                throw new Error('유효한 제품 데이터가 없습니다');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('product-list').innerHTML = '<p>제품을 불러오는 중 오류가 발생했습니다.</p>';
+        }
+    }
+
+    // 제품 데이터를 HTML로 렌더링
+    function renderProducts(products) {
+        const productsContainer = document.getElementById('product-list');
+
+        if (!products || products.length === 0) {
+            productsContainer.innerHTML = '<p>표시할 제품이 없습니다.</p>';
+            return;
+        }
+
+        // 각 제품에 대한 HTML 생성
+        const productsHTML = products.map(product => {
+            return `
+              <div class="phone-detail-card">
+                <div class="phone-detail-image">
+                  <img src="images/phones/${product.name.toLowerCase().replace(/\s+/g, '-')}.jpg" alt="${product.name}">
+                </div>
+                <div class="phone-detail-info">
+                  <h3 class="phone-name">${product.name}</h3>
+                  <div class="phone-specs">
+                    <span>${product.brandName}</span>
+                    <span>${formatDate(product.releaseDate)}</span>
+                    <span>${product.storage}GB</span>
+                  </div>
+                  <div class="phone-company">${product.brandName}</div>
+                  <div class="phone-price">${formatPrice(product.price)} <span>원</span></div>
+                </div>
+              </div>
+            `;
+        }).join('');
+
+        productsContainer.innerHTML = productsHTML;
+    }
+
+    // 가격 포맷팅 (1000단위 콤마)
+    function formatPrice(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    // 날짜 포맷팅 (YYYY-MM-DD -> YYYY년 MM월)
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
     }
 </script>
 </body>

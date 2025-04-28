@@ -87,3 +87,19 @@ header {
 .login-btn:hover, .join-btn:hover {
     opacity: 0.9;
 }
+
+footer {
+    background-color: #1A1F45;
+    color: white;
+    padding: 40px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo img {
+    height: 30px;
+}

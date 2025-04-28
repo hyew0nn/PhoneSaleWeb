@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오늘의 폰 - 휴대폰 판매 서비스</title>
-    <link rel="stylesheet" href="/assets/css/loginStyles.css">
+    <link rel="stylesheet" href="/assets/css/signupStyles.css">
     <link rel="stylesheet" href="/assets/css/commonStyles.css">
 </head>
 <body>
@@ -17,37 +17,50 @@
             <ul>
                 <li><a href="#">전체보기</a></li>
                 <li><a href="#">이벤트</a></li>
-                <li id="link-cart"><a href="#">장바구니</a></li>
-                <li id="link-buyList"><a href="#">구매내역</a></li>
+                <li><a href="#">장바구니</a></li>
+                <li><a href="#">구매내역</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
-<!-- 로그인 섹션 -->
-<section class="login-container">
-    <h1 class="login-heading">로그인</h1>
+<script src="/assets/js/indexJS.js"></script>
+<section class="signup-container">
+    <form class="signup-form">
+        <h1 class="signup-heading">회원가입</h1>
 
-    <div class="login-form">
-        <form>
-            <div class="form-group">
-                <label for="email">이메일</label>
-                <input type="text" id="email" placeholder="아이디를 입력하세요" required>
-            </div>
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
+        </div>
 
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" placeholder="비밀번호를 입력하세요" required>
-            </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+        </div>
 
-            <button type="button" class="submit-btn">로그인하기</button>
+        <div class="form-group">
+            <label for="confirmPassword">비밀번호 확인</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호를 다시 입력하세요" required>
+        </div>
 
-            <div class="form-footer">
-                <p>계정이 없으신가요? <a href="#">회원가입</a></p>
-                <p><a href="#">아이디/비밀번호 찾기</a></p>
-            </div>
-        </form>
-    </div>
+        <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">주소</label>
+            <input type="text" id="address" name="address" placeholder="주소를 입력하세요" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">휴대폰 번호</label>
+            <input type="tel" id="phone" name="phone" placeholder="휴대폰 번호를 입력하세요 (예: 010-1234-5678)" required>
+        </div>
+
+        <button type="submit" class="signup-btn">회원가입</button>
+    </form>
 </section>
 
 <footer>
@@ -63,7 +76,6 @@
     </div>
 </footer>
 
-<script src="/assets/js/indexJS.js"></script>
 <script>
     window.onload = function(){
         document.querySelector(".submit-btn").onclick = login;
