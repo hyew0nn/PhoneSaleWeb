@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("""
-            select new com.mycom.myapp.product.dto.ProductDto(
+            select new com.mycom.myapp.dto.ProductDto(
                     p.id, p.name, b.brandName, p.color, p.price, p.releaseDate, p.storage, p.specs, p.stock
             )
             from Product p join p.brand b
@@ -17,7 +17,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<ProductDto> getProducts();
 
     @Query("""
-            select new com.mycom.myapp.product.dto.ProductDto(
+            select new com.mycom.myapp.dto.ProductDto(
                     p.id, p.name, b.brandName, p.color, p.price, p.releaseDate, p.storage, p.specs, p.stock
             )
             from Product p join p.brand b
