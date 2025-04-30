@@ -15,7 +15,7 @@
         </div>
         <nav class="main-nav">
             <ul>
-                <li><a href="#">전체보기</a></li>
+                <li><a href="#">홈</a></li>
                 <li><a href="#">이벤트</a></li>
                 <li id="link-cart"><a href="#">장바구니</a></li>
                 <li id="link-buyList"><a href="#">구매내역</a></li>
@@ -43,7 +43,7 @@
             <button type="button" class="submit-btn">로그인하기</button>
 
             <div class="form-footer">
-                <p>계정이 없으신가요? <a href="#">회원가입</a></p>
+                <p>계정이 없으신가요? <a href="/signup.html">회원가입</a></p>
                 <p><a href="#">아이디/비밀번호 찾기</a></p>
             </div>
         </form>
@@ -54,7 +54,7 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="images/footer-logo.png" alt="하나카즈 로고">
+                <img src="images/footer-logo.png">
             </div>
             <div class="footer-links">
                 <!-- 푸터 링크들 -->
@@ -79,7 +79,7 @@
         let jsonStr = JSON.stringify({ email, password });
 
         // url
-        let url = "/users/login";
+        let url = "api/auth/login";
 
         // post, parameter
         let fetchOptions = {
@@ -97,9 +97,9 @@
 
         if(data.result == "success"){
 
-            // user 의 name, email 을 이후 사용하려 한다.
-            sessionStorage.setItem("name", data.userDto.name);
-            sessionStorage.setItem("email", data.userDto.email);
+            // user 의 id, name 을 이후 사용하려 한다.
+            sessionStorage.setItem("id", data.id);
+            sessionStorage.setItem("name", data.name);
 
             // index.html 이동
             window.location.href="index.html";

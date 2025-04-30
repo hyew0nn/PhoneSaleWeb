@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 폰 - 휴대폰 판매 서비스</title>
+    <link rel="stylesheet" href="/assets/css/commonStyles.css">
+    <link rel="stylesheet" href="/assets/css/buyStyles.css">
+</head>
+<body>
+<header>
+    <div class="container header-container">
+        <div class="logo">
+            <img src="images/logo.png" alt="오늘의 폰">
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#">홈</a></li>
+                <li><a href="#">이벤트</a></li>
+                <li id="link-cart"><a href="#">장바구니</a></li>
+                <li id="link-buyList"><a href="#">구매내역</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="login-btn">LOGIN</button>
+            <button class="join-btn">JOIN</button>
+            <span class="user-name-wrapper"><span class="user-name"></span> 님 안녕하세요.</span>
+            <button class="logout-btn">LOGOUT</button>
+        </div>
+    </div>
+</header>
+
+<div class="main-container">
+    <h1>주문/결제</h1>
+
+    <div class="order-layout">
+        <div class="order-main">
+            <div class="order-section">
+                <div class="section-title">
+                    배송 정보
+                    <button class="address-btn">배송지 목록</button>
+                </div>
+
+                <div class="recent-address">
+                    <div class="address-name">기본 배송지</div>
+                    <div class="address-details">
+                        <div>홍길동 | 010-1234-5678</div>
+                        <div>서울특별시 강남구 테헤란로 123 (우: 06234)</div>
+                    </div>
+                </div>
+
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">받는 사람</label>
+                        <input type="text" class="form-input" placeholder="이름을 입력하세요">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">연락처</label>
+                        <input type="tel" class="form-input" placeholder="휴대폰 번호를 입력하세요">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">배송지 주소</label>
+                        <div class="address-input">
+                            <input type="text" class="form-input" placeholder="우편번호" readonly>
+                            <button type="button" class="address-btn">주소 찾기</button>
+                        </div>
+                        <input type="text" class="form-input address-detail" placeholder="기본 주소" readonly>
+                        <input type="text" class="form-input address-detail" placeholder="상세 주소를 입력하세요">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">배송 요청사항</label>
+                        <input type="text" class="form-input" placeholder="배송시 요청사항을 입력하세요">
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="saveAddress">
+                        <label for="saveAddress" class="checkbox-label">이 배송지를 기본 배송지로 저장</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="order-section">
+                <div class="section-title">주문 상품 정보</div>
+
+                <div class="product-list">
+                    <div class="product-item">
+                        <img src="/api/placeholder/80/80" alt="Galaxy S23" class="product-img">
+                        <div class="product-details">
+                            <div class="product-name">Galaxy S23</div>
+                            <div class="product-spec">Samsung | 2023년 1월 | 128GB | 블랙</div>
+                            <div class="product-quantity">수량: 1개</div>
+                        </div>
+                        <div class="product-price">1,250,000원</div>
+                    </div>
+
+                    <div class="product-item">
+                        <img src="/api/placeholder/80/80" alt="Galaxy Z Flip 3" class="product-img">
+                        <div class="product-details">
+                            <div class="product-name">Galaxy Z Flip 3</div>
+                            <div class="product-spec">Samsung | 2023년 8월 | 128GB | 라벤더</div>
+                            <div class="product-quantity">수량: 1개</div>
+                        </div>
+                        <div class="product-price">1,750,000원</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-section">
+                <div class="section-title">결제 정보</div>
+
+                <div class="summary-row">
+                    <div class="summary-label">상품 금액</div>
+                    <div class="summary-value">3,000,000원</div>
+                </div>
+
+                <div class="summary-row">
+                    <div class="summary-label">배송비</div>
+                    <div class="summary-value">0원</div>
+                </div>
+
+                <div class="summary-row">
+                    <div class="summary-label">할인 금액</div>
+                    <div class="summary-value">0원</div>
+                </div>
+
+                <div class="total-row">
+                    <div class="total-label">총 결제금액</div>
+                    <div class="total-value">3,000,000원</div>
+                </div>
+
+                <div class="terms-section">
+                    <div class="terms-title">구매 동의</div>
+
+                    <div class="terms-content">
+                        제1조(목적)<br>
+                        이 약관은 오늘의 폰(이하 "회사")이 운영하는 사이트에서 제공하는 서비스(이하 "서비스")를 이용함에 있어 회사와 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.<br><br>
+
+                        제2조(정의)<br>
+                        1. "사이트"란 회사가 재화 또는 용역을 이용자에게 제공하기 위하여 컴퓨터, 모바일 등 정보통신설비를 이용하여 재화 또는 용역을 거래할 수 있도록 설정한 가상의 영업장을 말합니다.<br>
+                        2. "이용자"란 "사이트"에 접속하여 이 약관에 따라 "회사"가 제공하는 서비스를 받는 회원 및 비회원을 말합니다.
+                    </div>
+
+                    <div class="checkbox-group checkbox-agree">
+                        <input type="checkbox" id="agreeTerms">
+                        <label for="agreeTerms" class="checkbox-label">구매조건 확인 및 결제에 동의합니다.</label>
+                    </div>
+
+                    <button class="order-btn">3,000,000원 결제하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/indexJS.js"></script>
+<script>
+    window.onload = function () {
+        initUI();
+        fetchProducts();
+
+        document.querySelector(".login-btn").onclick = function() {
+            window.location.href = "/login.html";
+        };
+
+        document.querySelector(".signup-btn").onclick = function() {
+            window.location.href = "/signup.html";
+        };
+
+        document.querySelector(".logout-btn").onclick = logout;
+    }
+
+
+    // 제품 API에서 데이터 가져오기
+    async function fetchProducts() {
+        try {
+            const response = await fetch('api/products');
+            if (!response.ok) {
+                throw new Error('제품 데이터를 불러오는데 실패했습니다');
+            }
+            const data = await response.json(); // 전체 응답 객체
+
+            // products 배열 접근
+            if (data.message === "success" && Array.isArray(data.products)) {
+                renderProducts(data.products);
+            } else {
+                throw new Error('유효한 제품 데이터가 없습니다');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('product-list').innerHTML = '<p>제품을 불러오는 중 오류가 발생했습니다.</p>';
+        }
+    }
+
+    // 제품 데이터를 HTML로 렌더링
+    function renderProducts(products) {
+        const productsContainer = document.getElementById('product-list');
+
+        if (!products || products.length === 0) {
+            productsContainer.innerHTML = '<p>표시할 제품이 없습니다.</p>';
+            return;
+        }
+
+        // 각 제품에 대한 HTML 생성
+        const productsHTML = products.map(product => {
+            return `
+              <div class="phone-detail-card">
+                <div class="phone-detail-image">
+                  <img src="images/phones/${product.name.toLowerCase().replace(/\s+/g, '-')}.jpg" alt="${product.name}">
+                </div>
+                <div class="phone-detail-info">
+                  <h3 class="phone-name">${product.name}</h3>
+                  <div class="phone-specs">
+                    <span>${product.brandName}</span>
+                    <span>${formatDate(product.releaseDate)}</span>
+                    <span>${product.storage}GB</span>
+                  </div>
+                  <div class="phone-company">${product.brandName}</div>
+                  <div class="phone-price">${formatPrice(product.price)} <span>원</span></div>
+                </div>
+              </div>
+            `;
+        }).join('');
+
+        productsContainer.innerHTML = productsHTML;
+    }
+
+    // 가격 포맷팅 (1000단위 콤마)
+    function formatPrice(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    // 날짜 포맷팅 (YYYY-MM-DD -> YYYY년 MM월)
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
+    }
+</script>
+</body>
+</html>

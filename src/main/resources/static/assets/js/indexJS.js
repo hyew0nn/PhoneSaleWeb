@@ -1,7 +1,8 @@
 function initUI() {
-    let userName = sessionStorage.getItem("email");
+    let userId = sessionStorage.getItem("id");
+    let userName = sessionStorage.getItem("name");
 
-    if (userName == null) {
+    if (userId == null) {
         document.querySelector(".user-name").innerHTML = '';
         document.querySelector(".user-name-wrapper").style.display = "none";
         document.querySelector(".join-btn").style.display = "inline";
@@ -20,7 +21,7 @@ function initUI() {
 
 async function logout(){
     // url
-    let url = "/users/logout";
+    let url = "api/auth/logout";
 
     let response = await fetch(url);
     let data = await response.json()
@@ -28,9 +29,8 @@ async function logout(){
     console.log(data);
 
     if(data.result == "success"){
-        // user 의 name, email 을 삭제 ( 개별 처리 )
+        sessionStorage.removeItem("id");
         sessionStorage.removeItem("name");
-        sessionStorage.removeItem("email");
 
         // 한꺼번에 전체 삭제
         // sessionStorage.clear();

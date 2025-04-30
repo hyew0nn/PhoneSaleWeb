@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 폰 - Galaxy S23 상세</title>
+    <link rel="stylesheet" href="/assets/css/detailStyles.css"/>
+    <link rel="stylesheet" href="/assets/css/commonStyles.css"/>
+</head>
+<body>
+<header>
+    <div class="container header-container">
+        <div class="logo">
+            <img src="images/logo.png" alt="오늘의 폰">
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#">홈</a></li>
+                <li><a href="#">이벤트</a></li>
+                <li id="link-cart"><a href="#">장바구니</a></li>
+                <li id="link-buyList"><a href="#">구매내역</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="login-btn">LOGIN</button>
+            <button class="join-btn">JOIN</button>
+            <span class="user-name-wrapper"><span class="user-name"></span> 님 안녕하세요.</span>
+            <button class="logout-btn">LOGOUT</button>
+        </div>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="product-detail">
+        <div class="product-images">
+            <div class="main-image">
+                <img src="/api/placeholder/400/400" alt="Galaxy S23" />
+            </div>
+        </div>
+
+        <div class="product-info">
+            <div class="product-header">
+                <h1 class="product-name">Galaxy S23</h1>
+                <div class="product-spec">Samsung | 2023년 1월 | 128GB</div>
+            </div>
+
+            <div class="price-section">
+                <div class="price-label">판매가</div>
+                <div class="price">1,250,000원</div>
+            </div>
+
+            <div class="option-section">
+                <div class="option-title">색상</div>
+                <div class="color-options">
+                    <div class="color-option color-black active"></div>
+                </div>
+
+                <div class="option-title">저장 용량</div>
+                <div class="storage-options">
+                    <div class="storage-option active">128GB</div>
+                </div>
+            </div>
+
+            <div class="quantity-section">
+                <div class="option-title">수량</div>
+                <div class="quantity-control">
+                    <button class="quantity-btn">-</button>
+                    <input type="number" value="1" min="1" class="quantity-input">
+                    <button class="quantity-btn">+</button>
+                </div>
+            </div>
+
+            <div class="total-section">
+                <div class="total-label">총 상품금액</div>
+                <div class="total-price">1,250,000원</div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="cart-btn">장바구니 담기</button>
+                <button class="buy-btn">바로 구매하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/indexJS.js"></script>
+<script>
+    window.onload = function () {
+        initUI();
+
+        const productId = getProductIdFromURL()
+        fetchGetProduct(productId);
+    }
+
+    function getProductIdFromURL() {
+        const pathSegments = window.location.pathname.split('/');
+        return pathSegments[pathSegments.length - 1];
+    }
+
+    async function fetchGetProduct(productId) {
+        try {
+            const response = await fetch('api/products/' + productId);
+            if (!response.ok) {
+                throw new Error('제품 데이터를 불러오는데 실패했습니다');
+            }
+            const productDto = await response.json(); // 전체 응답 객체
+            renderProductDetail(productDto);
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('product-list').innerHTML = '<p>제품을 불러오는 중 오류가 발생했습니다.</p>';
+        }
+    }
+
+    function renderProductDetail(product) {
+        // 제품명
+        document.querySelector('.product-name').textContent = product.name;
+
+        // 제품 사양 (브랜드 | 출시일 | 저장 용량)
+        const releaseDate = new Date(product.releaseDate);
+        const releaseText = `${releaseDate.getFullYear()}년 ${releaseDate.getMonth() + 1}월`;
+        document.querySelector('.product-spec').textContent =
+            `${product.brandName} | ${releaseText} | ${product.storage}`;
+
+        // 가격
+        const formattedPrice = product.price.toLocaleString();
+        document.querySelector('.price').textContent = `${formattedPrice}원`;
+        document.querySelector('.total-price').textContent = `${formattedPrice}원`;
+
+        // 색상 옵션 (하나만 있는 경우)
+        const colorContainer = document.querySelector('.color-options');
+        colorContainer.innerHTML = `<div class="color-option color-${product.color.toLowerCase()} active"></div>`;
+
+        // 저장 용량 옵션 (하나만 있는 경우)
+        const storageContainer = document.querySelector('.storage-options');
+        storageContainer.innerHTML = `<div class="storage-option active">${product.storage}</div>`;
+
+        // 수량 초기값
+        const quantityInput = document.querySelector('.quantity-input');
+        quantityInput.value = 1;
+        quantityInput.min = 1;
+
+        // 수량 버튼 이벤트
+        document.querySelectorAll('.quantity-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                let quantity = parseInt(quantityInput.value);
+                if (btn.textContent === '+') {
+                    if (quantity < product.stock) quantity++;
+                } else {
+                    if (quantity > 1) quantity--;
+                }
+                quantityInput.value = quantity;
+
+                // 총 가격 업데이트
+                const total = product.price * quantity;
+                document.querySelector('.total-price').textContent = `${total.toLocaleString()}원`;
+            });
+        });
+
+        // 수량 수동 입력 이벤트
+        quantityInput.addEventListener('input', () => {
+            let quantity = parseInt(quantityInput.value);
+            if (isNaN(quantity) || quantity < 1) quantity = 1;
+            if (quantity > product.stock) quantity = product.stock;
+            quantityInput.value = quantity;
+            const total = product.price * quantity;
+            document.querySelector('.total-price').textContent = `${total.toLocaleString()}원`;
+        });
+    }
+</script>
+</body>
+</html>
