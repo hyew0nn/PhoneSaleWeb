@@ -9,5 +9,6 @@ import java.util.List;
 @Setter
 public class GetProductsResponse {
     public String message;
+    public int count;
     public List<ProductDto> products;
 }
